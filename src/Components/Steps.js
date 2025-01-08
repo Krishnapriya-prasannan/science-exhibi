@@ -38,13 +38,14 @@ const StepsForParticipation = () => {
         <motion.h2
           className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500 mb-12 text-center"
           initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{
             type: "spring",
             stiffness: 100,
             damping: 15,
             duration: 1.2,
           }}
+          viewport={{ once: true }} // Trigger animation only once when in view
         >
           Steps for Participation
         </motion.h2>
@@ -62,7 +63,8 @@ const StepsForParticipation = () => {
                     : "bg-blue-700 hover:bg-blue-600 text-white"
                 }`}
               initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }} // Trigger animation only once when in view
               transition={{
                 type: "spring",
                 stiffness: 300,
@@ -92,7 +94,8 @@ const StepsForParticipation = () => {
               key={index}
               className="bg-gradient-to-r from-blue-800 to-blue-600 text-white p-8 rounded-tl-lg rounded-br-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
               initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }} // Trigger animation only once when in view
               transition={{
                 type: "spring",
                 stiffness: 250,
