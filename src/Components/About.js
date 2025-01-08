@@ -9,8 +9,9 @@ const About = () => {
           {/* Left Box */}
           <motion.div
             className="flex-1 bg-blue-800 p-8 rounded-lg shadow-xl"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 1, ease: 'easeOut' }}
           >
             <h2 className="text-4xl md:text-5xl font-semibold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-500">
@@ -24,9 +25,10 @@ const About = () => {
           {/* Right Box */}
           <motion.div
             className="flex-1 bg-blue-800 p-8 rounded-lg shadow-xl"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 1, ease: 'easeOut' }}
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}
           >
             <h3 className="text-3xl font-semibold mb-4 text-blue-200">
               Why should students participate?
