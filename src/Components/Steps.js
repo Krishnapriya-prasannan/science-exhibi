@@ -5,7 +5,7 @@ const StepsForParticipation = () => {
 
   const steps = [
     {
-      title: "Step 1 - Registration",
+      title: "Step 1",
       details: [
         "Fill up participant details online.",
         "Pay registration fee (Indian schools).",
@@ -13,7 +13,7 @@ const StepsForParticipation = () => {
       ]
     },
     {
-      title: "Step 2 - Project Development & Submission",
+      title: "Step 2",
       details: [
         "Brainstorm project ideas with your mentor.",
         "Develop your project using eco-friendly materials.",
@@ -21,7 +21,7 @@ const StepsForParticipation = () => {
       ]
     },
     {
-      title: "Step 3 - Screening & Evaluation",
+      title: "Step 3",
       details: [
         "Attend Regional Level Exhibition.",
         "Selected projects proceed to the National Level.",
@@ -43,7 +43,9 @@ const StepsForParticipation = () => {
               key={index}
               onClick={() => setActiveStep(index + 1)}
               className={`px-8 py-4 text-xl font-semibold rounded-full transition-all duration-300 transform hover:scale-110
-                ${activeStep === index + 1 ? 'bg-yellow-400 text-black shadow-xl' : 'bg-blue-700 hover:bg-blue-600 text-white'}`}
+                ${activeStep === index + 1 ? 'bg-yellow-400 text-black shadow-xl' : 'bg-blue-700 hover:bg-blue-600 text-white'}
+                sm:px-6 sm:py-3 sm:rounded-lg
+                xs:px-12 xs:py-12 xs:text-2xl`} // For mobile views, increase padding and text size
             >
               {step.title}
             </button>
