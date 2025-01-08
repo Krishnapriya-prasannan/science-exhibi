@@ -7,12 +7,13 @@ const Objectives = () => {
       <div className="max-w-6xl mx-auto text-center px-6">
         <motion.h2
           className="text-4xl md:text-5xl font-semibold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-500"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
           Our Objectives
         </motion.h2>
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
             { title: "Inspire Creativity", description: "Encourage innovative ideas and confident presentations." },
@@ -24,21 +25,31 @@ const Objectives = () => {
           ].map((obj, index) => (
             <motion.div
               key={index}
-              className="bg-white p-6 rounded-xl shadow-xl transform transition duration-500"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
+              className="bg-white p-6 rounded-xl shadow-lg"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
               whileHover={{
-                scale: 1.05,
-                background: "linear-gradient(135deg, #f39c12, #8e44ad)",
-                boxShadow: "0 10px 40px rgba(0, 0, 0, 0.25)",
-                transition: { duration: 0.4 },
+                rotate: [0, 5, -5, 0],
+                boxShadow: "0 8px 20px rgba(0, 0, 0, 0.1)",
+                backgroundColor: "#f5f5f5",
+                transition: { duration: 0.3, type: "spring", stiffness: 100, damping: 10 },
               }}
-              transition={{ duration: 0.7, delay: index * 0.3 }}
+              whileTap={{
+                scale: 0.95,
+                rotate: 5,
+                transition: { type: "spring", stiffness: 200, damping: 10 },
+              }}
+              transition={{ delay: index * 0.2, duration: 0.6 }}
             >
               <motion.h3
                 className="text-2xl font-semibold text-blue-700 mb-4"
-                whileHover={{ color: "#2980b9", scale: 1.2 }}
-                transition={{ duration: 0.3 }}
+                initial={{ opacity: 0, y: -30 }}
+                animate={{ opacity: 1, y: 0 }}
+                whileHover={{
+                  color: "#f39c12",
+                  transition: { type: "spring", stiffness: 200, damping: 20 },
+                }}
+                transition={{ delay: 0.2 }}
               >
                 {obj.title}
               </motion.h3>
@@ -46,7 +57,7 @@ const Objectives = () => {
                 className="text-gray-700"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.7 }}
+                transition={{ delay: 0.4 }}
               >
                 {obj.description}
               </motion.p>
