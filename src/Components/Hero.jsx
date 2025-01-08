@@ -1,91 +1,160 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion"; // Import animation library
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import slider1 from "./images/slider1.jpg";
+import slider2 from "./images/slider2.jpg";
 
-// Import your images
-import slider1 from './images/slider1.jpg';
-import slider2 from './images/slider2.jpg';
-
-const Hero = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  
-  const slides = [slider1, slider2];  // Your background images
-
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + slides.length) % slides.length);
-  };
-
-  // Automatic slideshow
-  useEffect(() => {
-    const interval = setInterval(nextSlide, 5000);  // Change slide every 5 seconds
-    return () => clearInterval(interval);  // Cleanup on component unmount
-  }, []);
+// Theme Cards Component
+const ThemeCardsContainer = () => {
+  const themes = [
+    {
+      title: "Social Impact",
+      description:
+        "Showcase projects addressing critical social issues. Focusing on community betterment, inclusivity, health access, education access, or solving local/national humanitarian challenges that make a meaningful impact for overall quality of life or societal welfare.",
+    },
+    {
+      title: "Economic Impact",
+      description:
+        "Showcase innovations that boost the financial economy and foster sustainability with emphasis on generating value through the creation of novel solutions in manufacturing or automation. Focus on technological growth, trade, market enhancements, and creation of revenue generation using innovation in areas like AI-based tools/digital tools.",
+    },
+    {
+      title: "Environmental Impact",
+      description:
+        "Focus on innovations for the long-term preservation of our environment that focuses on creating cleaner systems, better sustainable resources, and protection of the natural environment that leads to a safer world, with long-term preservation strategies. Show projects related to alternative resources that focus on zero waste/emission principles.",
+    },
+  ];
 
   return (
-    <section className="relative bg-blue-900 text-white h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 flex transition-all duration-1000 ease-in-out">
-        <motion.div
-          key={currentIndex}
-          className="w-full h-full"
-          style={{
-            backgroundImage: `url(${slides[currentIndex]})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            opacity: 0.8,
-            transition: "opacity 1s ease-in-out",  // Adding fade effect between slides
-          }}
-        >
-          <div className="absolute inset-0 bg-black opacity-50"></div>
-        </motion.div>
+    <div className="w-full max-w-7xl mx-auto p-8">
+      <div className="mb-8 text-center">
+        <h2 className="text-3xl font-extrabold uppercase text-gray-800 tracking-wide">
+          Themes for Project
+        </h2>
+        <p className="text-gray-600 mt-2 text-lg">
+          Explore our key focus areas to inspire innovation and creativity.
+        </p>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+        {themes.map((theme, index) => (
+          <div
+            key={index}
+            className="w-full p-6 bg-white rounded-lg border border-gray-200 shadow-lg transition-transform duration-300 hover:shadow-2xl hover:scale-105"
+          >
+            <h3 className="text-2xl font-semibold text-gray-700 uppercase text-center mb-4">
+              {theme.title}
+            </h3>
+            <p className="text-gray-600 text-justify">{theme.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Hero Section Component
+const Hero = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [slidePosition, setSlidePosition] = useState(0);
+  const sliderWrapperRef = useRef(null);
+
+  const images = [slider1, slider2];
+  const totalSlides = images.length;
+
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === totalSlides - 1 ? 0 : prevIndex + 1
+    );
+  }, [totalSlides]);
+
+  const prevSlide = useCallback(() => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? totalSlides - 1 : prevIndex - 1
+    );
+  }, [totalSlides]);
+
+  const goToSlide = useCallback((index) => {
+    setCurrentIndex(index);
+  }, []);
+
+  useEffect(() => {
+    const handleAnimation = () => {
+      const newPosition = -currentIndex * 100;
+      if (sliderWrapperRef.current) {
+        setSlidePosition(newPosition);
+      }
+    };
+    handleAnimation();
+  }, [currentIndex]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [nextSlide]);
+
+  return (
+    <div className="bg-gray-50">
+      {/* Logo Section */}
+      <div className="flex justify-center pt-8">
+        <img
+          src="https://www.ipsacademy.org/assets/images/IPSALogo.svg"
+          alt="IPS logo"
+          className="w-48 h-auto animate-bounce"
+        />
       </div>
 
-      <div className="relative z-10 text-center px-6">
-        <motion.h1
-          className="text-4xl md:text-6xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-red-500"
-          initial={{ y: -100 }}
-          animate={{ y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
+      {/* Slider Section */}
+      <div className="mt-8 relative h-[500px] flex items-center justify-center overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 rounded-lg shadow-xl">
+        {/* Slider Wrapper */}
+        <div
+          ref={sliderWrapperRef}
+          className="flex transition-transform duration-700 ease-in-out"
+          style={{ transform: `translateX(${slidePosition}%)` }}
         >
-          Science Exhibition 2024
-        </motion.h1>
+          {images.map((image, index) => (
+            <div className="min-w-full box-border" key={index}>
+              <img
+                src={image}
+                alt={`Slide ${index + 1}`}
+                className="w-full h-full object-cover rounded-lg"
+              />
+            </div>
+          ))}
+        </div>
 
-        <motion.p
-          className="text-lg md:text-2xl mb-6 opacity-80"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.2, delay: 0.5 }}
+        {/* Navigation Buttons */}
+        <button
+          onClick={prevSlide}
+          className="absolute top-1/2 transform -translate-y-1/2 left-4 text-white text-2xl bg-black bg-opacity-50 p-3 rounded-full hover:bg-opacity-80 transition"
         >
-          A world of scientific discoveries and creativity awaits you!
-        </motion.p>
+          ❮
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute top-1/2 transform -translate-y-1/2 right-4 text-white text-2xl bg-black bg-opacity-50 p-3 rounded-full hover:bg-opacity-80 transition"
+        >
+          ❯
+        </button>
 
-        <motion.a
-          href="#steps"
-          className="inline-block bg-yellow-500 text-black py-3 px-8 rounded-lg shadow-lg transform hover:scale-105 hover:bg-yellow-400 transition duration-300"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1, delay: 1 }}
-        >
-          Get Started
-        </motion.a>
+        {/* Slide Indicators */}
+        <div className="absolute bottom-5 w-full flex justify-center items-center space-x-4">
+          {images.map((_image, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`rounded-full border-2 border-white h-4 w-4 ${
+                currentIndex === index
+                  ? "bg-white"
+                  : "bg-transparent"
+              } transition-all duration-300`}
+            />
+          ))}
+        </div>
       </div>
 
-      <button
-        className="absolute top-1/2 left-4 transform -translate-y-1/2 text-white text-3xl bg-black p-2 rounded-full shadow-lg"
-        onClick={prevSlide}
-      >
-        &#10094;
-      </button>
-
-      <button
-        className="absolute top-1/2 right-4 transform -translate-y-1/2 text-white text-3xl bg-black p-2 rounded-full shadow-lg"
-        onClick={nextSlide}
-      >
-        &#10095;
-      </button>
-    </section>
+      {/* Theme Cards */}
+      <ThemeCardsContainer />
+    </div>
   );
 };
 
