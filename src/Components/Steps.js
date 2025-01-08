@@ -56,11 +56,12 @@ const StepsForParticipation = () => {
 
           {/* Sliding line */}
           <div
-            className={`absolute top-20 left-0 w-full h-2 bg-yellow-400 transition-all duration-300 rounded-full`}
+            className={`absolute left-0 top-20 sm:top-22 w-full h-2 bg-yellow-400 transition-all duration-300 rounded-full`}
             style={{
               width: `${100 / steps.length * 1.0}%`,  // Increased width for more space
-              left: `${(activeStep - 1) * (100 / steps.length)}%`
+              left: `${(activeStep - 1) * (100 / steps.length)}%`,
             }}
+             // Different top values for mobile and desktop
           ></div>
         </div>
 
