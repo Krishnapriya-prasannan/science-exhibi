@@ -104,7 +104,7 @@ const Hero = () => {
       </div>
 
       {/* Slider Section */}
-      <div className="mt-8 relative h-[500px] flex items-center justify-center overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 rounded-lg shadow-xl">
+      <div className="mt-8 relative h-[500px] flex items-center justify-center overflow-hidden shadow-xl">
         {/* Slider Wrapper */}
         <div
           ref={sliderWrapperRef}
@@ -116,7 +116,7 @@ const Hero = () => {
               <img
                 src={image}
                 alt={`Slide ${index + 1}`}
-                className="w-full h-full object-cover rounded-lg"
+                className="w-full h-full object-cover"
               />
             </div>
           ))}

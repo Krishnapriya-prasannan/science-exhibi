@@ -17,12 +17,12 @@ const Header = () => {
           <img
             src={mainLogo}
             alt="Main Logo"
-            className="h-14 w-auto md:h-16  "
+            className="h-14 w-auto md:h-16"
           />
           <img
             src={logo}
             alt="Logo"
-            className="h-14 w-auto md:h-16 "
+            className="h-14 w-auto md:h-16"
             onError={(e) => (e.target.src = 'path-to-default-logo.png')}
           />
           <span className="text-xl md:text-2xl font-bold tracking-wide drop-shadow-sm">
@@ -43,7 +43,7 @@ const Header = () => {
         <div
           className={`${
             isMobileMenuOpen
-              ? 'fixed inset-0 bg-blue-50 flex flex-col items-center justify-center z-50'
+              ? 'fixed inset-0 bg-blue-50 flex flex-col items-center justify-center z-50 bg-opacity-90 backdrop-blur-lg'
               : 'hidden md:flex md:items-center md:space-x-6'
           }`}
         >
@@ -56,19 +56,23 @@ const Header = () => {
             </button>
           )}
 
-          <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
+          <div
+            className={`${
+              isMobileMenuOpen ? 'flex flex-col items-center space-y-6' : 'flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4'
+            }`}
+          >
             <button
-              className="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-2 rounded-lg shadow-md transform hover:scale-105 transition duration-300"
+              className="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-2 rounded-lg shadow-md transform hover:scale-105 transition duration-300 ease-in-out"
             >
               Log In
             </button>
             <button
-              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg shadow-md transform hover:scale-105 transition duration-300"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg shadow-md transform hover:scale-105 transition duration-300 ease-in-out"
             >
               Sign up as Team Leader
             </button>
             <button
-              className="bg-white hover:bg-gray-200 text-blue-900 font-semibold px-6 py-2 rounded-lg shadow-md transform hover:scale-105 transition duration-300 border border-blue-700"
+              className="bg-white hover:bg-gray-200 text-blue-900 font-semibold px-6 py-2 rounded-lg shadow-md transform hover:scale-105 transition duration-300 ease-in-out border border-blue-700"
             >
               Register Project
             </button>
