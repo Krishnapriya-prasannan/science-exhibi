@@ -8,8 +8,9 @@ const Objectives = () => {
         <motion.h2
           className="text-4xl md:text-5xl font-semibold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-500"
           initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}
+          viewport={{ once: true }} // Trigger animation once when in view
         >
           Our Objectives
         </motion.h2>
@@ -27,7 +28,8 @@ const Objectives = () => {
               key={index}
               className="bg-white p-6 rounded-xl shadow-lg"
               initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }} // Trigger animation once when in view
               whileHover={{
                 rotate: [0, 5, -5, 0],
                 boxShadow: "0 8px 20px rgba(0, 0, 0, 0.1)",
@@ -44,7 +46,8 @@ const Objectives = () => {
               <motion.h3
                 className="text-2xl font-semibold text-blue-700 mb-4"
                 initial={{ opacity: 0, y: -30 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} // Trigger animation once when in view
                 whileHover={{
                   color: "#f39c12",
                   transition: { type: "spring", stiffness: 200, damping: 20 },
@@ -56,7 +59,8 @@ const Objectives = () => {
               <motion.p
                 className="text-gray-700"
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }} // Trigger animation once when in view
                 transition={{ delay: 0.4 }}
               >
                 {obj.description}

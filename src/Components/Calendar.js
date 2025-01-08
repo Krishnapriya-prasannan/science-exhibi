@@ -19,20 +19,33 @@ const CalendarSection = () => {
   ];
 
   return (
-    <section id="calendar" className="py-16 bg-blue-50 text-gray-800">
+    <section
+      id="calendar"
+      className="py-16 bg-blue-50 text-gray-800"
+    >
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center mb-12 text-blue-900">Calendar</h2>
+        <motion.h2
+          className="text-4xl font-bold text-center mb-12 text-blue-900"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1, ease: 'easeOut' }}
+          viewport={{ once: true }}
+        >
+          Calendar
+        </motion.h2>
+
         <div className="grid gap-8 md:grid-cols-3">
           {events.map((event, index) => (
             <motion.div
               key={index}
               className="flex flex-col items-center text-center bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
               initial={{ opacity: 0, scale: 0.9 }}
-              animate={{
+              whileInView={{
                 opacity: 1,
                 scale: 1,
                 y: [0, -10, 0], // Bouncing effect
               }}
+              viewport={{ once: true }} // Trigger animation only once when the element comes into view
               whileHover={{
                 scale: 1.05, // Slight scale on hover
                 boxShadow: '0 10px 30px rgba(0, 0, 0, 0.15)', // Shadow on hover
@@ -65,7 +78,7 @@ const CalendarSection = () => {
                 className="text-2xl font-semibold mb-2 text-blue-900"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.3 }}
+                transition={{ duration: 3.5, delay: index * 0.3 }}
               >
                 {event.title}
               </motion.h3>

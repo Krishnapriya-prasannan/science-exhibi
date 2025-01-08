@@ -40,10 +40,11 @@ const ThemeCardsContainer = () => {
               opacity: 0,
               y: 50, // Slide in from the bottom
             }}
-            animate={{
+            whileInView={{
               opacity: 1,
-              y: 0, // Return to normal position
+              y: 0, // Return to normal position when in view
             }}
+            viewport={{ once: true }} // Trigger animation only once when the element comes into view
             whileHover={{
               scale: 1.1, // Slight scale-up on hover
               boxShadow: "0 15px 25px rgba(0, 0, 0, 0.2)", // Floating effect
@@ -76,10 +77,11 @@ const ThemeCardsContainer = () => {
                 opacity: 0,
                 y: 20,
               }}
-              animate={{
+              whileInView={{
                 opacity: 1,
                 y: 0,
               }}
+              viewport={{ once: true }} // Trigger animation only once when the element comes into view
               transition={{
                 duration: 0.6,
                 delay: 0.5, // Delay to animate text after card
